@@ -7,10 +7,10 @@ from tkinter.filedialog import askdirectory
 
 # System of ODEs
 def Blasius(eta, f):
-    return (f[1], f[2], f[0]*f[2])
+    return (f[1], f[2], -0.5*f[0]*f[2])
 
 # Boundary Conditions
-f0 = [0, 1, -0.6276]
+f0 = [0, 0, 0.332]
 
 # Solving the system of ODEs
 eta = np.linspace(0, 10, 10000)
@@ -42,14 +42,14 @@ plt.plot(f_0, x, 'r--' ,  label = r"Stream Function $f({\eta})$")
 plt.plot(f_1, x, 'g-.', label = r"Velocity Profile $f'({\eta})$")
 plt.plot(f_2, x, 'b', label = r"Shear Stress Function $f''({\eta})$")
 plt.legend()
-#plt.xlim(0, 2)
+plt.xlim(0, 2)
 plt.xlabel(r"$f'({\eta})$, $f'({\eta})$ and $f''({\eta})$")
 plt.xticks(np.arange(0, 2.1, step = 0.2))
-#plt.ylim(0, 10)
+plt.ylim(0, 10)
 plt.ylabel(r"${\eta}$")
 plt.grid(True)
 ratio = 9/16
-#plt.gca().set_aspect(abs((2-0)/(0-10))*ratio)
+plt.gca().set_aspect(abs((2-0)/(0-10))*ratio)
 plt.savefig(path + "\solution.svg", dpi = 1200)
 plt.show()
 
@@ -76,12 +76,12 @@ print(f"The value of delta_max is {round(delta_max, 4)} metres")
 plt.plot(x, delta, 'r--')
 plt.fill_between(x, delta, 0, color = "red", alpha = 0.2)
 plt.title("Boundary Layer Profile")
-#plt.xlim(0, x_crit)
+plt.xlim(0, x_crit)
 plt.xlabel("Distance along the plate (in metres)")
-#plt.ylim(0, delta_max*1.25)
+plt.ylim(0, delta_max*1.25)
 plt.ylabel("Distance normal to plate (in metres)")
-#plt.gca().set_aspect(abs((x_crit-0)/(0-delta_max*1.25))*ratio)
-#plt.ticklabel_format(style='sci',scilimits=(-3, 0),axis='both')
+plt.gca().set_aspect(abs((x_crit-0)/(0-delta_max*1.25))*ratio)
+plt.ticklabel_format(style='sci',scilimits=(-3, 0),axis='both')
 plt.grid(True)
 plt.savefig(path + "\BLprofile.svg", dpi = 1200)
 plt.show()
